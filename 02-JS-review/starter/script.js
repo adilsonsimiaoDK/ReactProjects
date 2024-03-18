@@ -142,7 +142,7 @@ function getBooks() {
 function getBook(id) {
   return data.find((d) => d.id === id);
 }
-
+/*
 //Destructuring
 const book = getBook(3);
 
@@ -229,3 +229,40 @@ const sorted = arr.slice().sort((a, b) => a - b);
 sorted;
 const sortedByPages = books.slice().sort((a, b) => a.pages - b.pages);
 sortedByPages;
+
+//array update, delete, add without
+
+// 1) add book object to array
+
+const newBook = {
+  id: 6,
+  title: "Harry Potter and the Chamber of Secrets",
+};
+const booksAfterAdd = [...books, newBook];
+booksAfterAdd;
+
+//delete book from array
+const booksAfterDel = booksAfterAdd.filter((book) => book.id !== 6);
+booksAfterDel;
+
+//Update from array
+const booksAfterUpdate = booksAfterDel.map((book) =>
+  book.id === 1 ? { ...book, pages: 1210 } : book
+);
+
+booksAfterUpdate;
+*/
+
+// fetch("https://jsonplaceholder.typicode.com/todos")
+//   .then((res) => res.json())
+//   .then((data) => console.log(data));
+
+async function getTodos() {
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+  const data = await res.json();
+  console.log(data);
+  return data;
+}
+
+const todos = getTodos();
+console.log(todos);
