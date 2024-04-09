@@ -68,66 +68,48 @@ function Header() {
 }
 
 function Menu() {
+  const pizzas = pizzaData;
+  //const pizzas = [];
+  const numPizzas = pizzas.length;
+
   return (
     <main className="menu">
       <h2>Our Menu</h2>
 
-      <ul className="pizzas">
-        {pizzaData.map((pizza) => (
-          <Pizza pizzaObje={pizza} key={pizza.name} />
-        ))}
-      </ul>
-
-      {/* <Pizza
-          name="Focaccia"
-          ingredients="Bread with italian olive oil and rosemary"
-          photoName="pizzas/focaccia.jpg "
-          price={15}
-        />
-        <Pizza
-          name="Pizza Magherita"
-          ingredients="Tomato and mozarella"
-          photoName="pizzas/margherita.jpg "
-          price={15}
-        />
-        <Pizza
-          name="Pizza Spinachi"
-          ingredients="Tomato, mozarella, spinach, and ricotta cheese"
-          photoName="pizzas/spinaci.jpg "
-          price={15}
-        />
-        <Pizza
-          name="Pizza Prosciutto"
-          ingredients="Tomato, mozarella, ham, aragula, and burrata cheese"
-          photoName="pizzas/prosciutto.jpg "
-          price={15}
-        />
-        <Pizza
-          name="Pizza Salamino"
-          ingredients="Tomato, mozarella and Pepperoni "
-          photoName="pizzas/salamino.jpg "
-          price={15}
-        />
-        <Pizza
-          name="Pizza Funghi"
-          ingredients="Tomato, mozarella, mushrooms, and onion"
-          photoName="pizzas/funghi.jpg "
-          price={10}
-        /> */}
+      {numPizzas > 0 ? (
+        <ul className="pizzas">
+          {pizzas.map((pizza) => (
+            <Pizza pizzaObje={pizza} key={pizza.name} />
+          ))}
+        </ul>
+      ) : (
+        <p>We're still working on our menu. Please came back later :)</p>
+      )}
     </main>
   );
 }
 
 function Pizza(props) {
+  // if (props.pizzaObje.soldOut)
+  //   return (
+  //     <img
+  //       className="photoName"
+  //       style={{
+  //         backgroundColor: props.pizzaObje.soldOut ? "transparent" : "grey",
+  //         opacity: props.pizzaObje.soldOut ? 0.5 : 1,
+  //       }}
+  //     />
+  //   );
+
   return (
-    <div className="pizza">
-      <img src={props.pizzaObje.photoName} alt={props.name} />
+    <li className="pizza">
+      <img src={props.pizzaObje.photoName} alt={props.pizzaObje.name} />
       <div>
         <h3>{props.pizzaObje.name}</h3>
         <p>{props.pizzaObje.ingredients}</p>
         <span>{props.pizzaObje.price}</span>
       </div>
-    </div>
+    </li>
   );
 }
 
@@ -139,8 +121,25 @@ function Footer() {
   console.log(isOpen);
   // if (hour >= openHours && hour <= closeHours) alert("We're currently open!");
   // else alert("Sorry we're closed");
+  // return (
+  //   <footer>{new Date().toLocaleTimeString()}. We're currently open</footer>
+  // );
+
   return (
-    <footer>{new Date().toLocaleTimeString()}. We're currently open</footer>
+    <footer className="footer">
+      {isOpen ? (
+        <div className="order">
+          <p>
+            We're Open until {closeHours}:00. Come visit us or order online.
+          </p>
+          <button className="btn">Order</button>
+        </div>
+      ) : (
+        <p>
+          We're happy to welcome you between {openHours}:00 and {closeHours}:00.
+        </p>
+      )}
+    </footer>
   );
 }
 
